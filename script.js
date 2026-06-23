@@ -44,17 +44,17 @@ function setupDownloadsCounter() {
     return;
   }
 
-  fetch("https://api.counterapi.dev/v1/downloadmedia/downloads")
+  fetch("https://countapi.mileshilliard.com/api/v1/get/downloadmedia/downloads")
     .then(res => {
       if (!res.ok) throw new Error("Counter not initialized yet or failed");
       return res.json();
     })
     .then(data => {
-      const count = parseInt(data.count, 10) || 0;
+      const count = parseInt(data.value, 10) || 0;
       animateCounter(counterEl, count);
     })
     .catch(err => {
-      console.error("Failed to fetch download count from CounterAPI:", err);
+      console.error("Failed to fetch download count from CountAPI:", err);
       animateCounter(counterEl, 0);
     });
 }
@@ -73,11 +73,10 @@ async function incrementDownloadCounter() {
   }
 
   try {
-    const res = await fetch("https://api.counterapi.dev/v1/downloadmedia/downloads/up");
+    const res = await fetch("https://countapi.mileshilliard.com/api/v1/hit/downloadmedia/downloads");
     if (res.ok) {
       const data = await res.json();
-      const count = parseInt(data.count, 10) || 0;
-
+      const count = parseInt(data.value, 10) || 0;
 
       const counterEl = document.getElementById('downloads-counter');
       if (counterEl) {
