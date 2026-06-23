@@ -44,16 +44,27 @@ function setupDownloadsCounter() {
     return;
   }
 
+  const cachedCount = sessionStorage.getItem('dm_downloads_count');
+  if (cachedCount) {
+    animateCounter(counterEl, parseInt(cachedCount, 10));
+    return;
+  }
+
+  counterEl.classList.add('skeleton-text');
+
   fetch("https://countapi.mileshilliard.com/api/v1/get/downloadmedia/downloads")
     .then(res => {
       if (!res.ok) throw new Error("Counter not initialized yet or failed");
       return res.json();
     })
     .then(data => {
+      counterEl.classList.remove('skeleton-text');
       const count = parseInt(data.value, 10) || 0;
+      sessionStorage.setItem('dm_downloads_count', count.toString());
       animateCounter(counterEl, count);
     })
     .catch(err => {
+      counterEl.classList.remove('skeleton-text');
       console.error("Failed to fetch download count from CountAPI:", err);
       animateCounter(counterEl, 0);
     });
