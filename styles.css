@@ -1177,3 +1177,14 @@ a {
   animation: skeleton-loading 1s linear infinite alternate;
   color: transparent !important;
 }
+
+.skeleton-block {
+  display: block;
+  background: var(--bg-hover);
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.skeleton-card {
+  pointer-events: none;
+  user-select: none;
+}

@@ -20,6 +20,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   const changelogPageContainer = document.getElementById("changelog-page-container");
 
   if (releasesContainer || changelogPageContainer) {
+    if (releasesContainer) {
+      releasesContainer.innerHTML = [1, 2].map(() => `
+        <div class="release-card clay-surface skeleton-card">
+          <div class="release-card-header">
+            <div class="release-version-area">
+              <span class="skeleton-block" style="width:80px;height:1.1em;border-radius:6px;"></span>
+              <span class="skeleton-block" style="width:50px;height:1em;border-radius:20px;"></span>
+            </div>
+            <span class="skeleton-block" style="width:130px;height:0.85em;border-radius:4px;"></span>
+          </div>
+          <div style="margin-top:1.2rem;display:flex;flex-direction:column;gap:0.6rem;">
+            <span class="skeleton-block" style="width:100%;height:2.5rem;border-radius:8px;"></span>
+            <span class="skeleton-block" style="width:100%;height:2.5rem;border-radius:8px;"></span>
+          </div>
+        </div>
+      `).join('');
+    }
     await syncReleasesFromChangelogs();
     if (releasesContainer) {
       renderReleases("all");
@@ -37,15 +54,8 @@ function setupDownloadsCounter() {
   const counterEl = document.getElementById('downloads-counter');
   if (!counterEl) return;
 
-  if (isLocalFile) {
-    console.log("Running from file:// protocol. Simulating downloads counter...");
-    const userIncrement = parseInt(localStorage.getItem('dm_user_download_increment') || '0', 10);
-    animateCounter(counterEl, userIncrement);
-    return;
-  }
-
   const cachedCount = sessionStorage.getItem('dm_downloads_count');
-  if (cachedCount) {
+  if (cachedCount !== null) {
     animateCounter(counterEl, parseInt(cachedCount, 10));
     return;
   }
@@ -54,7 +64,11 @@ function setupDownloadsCounter() {
 
   fetch("https://countapi.mileshilliard.com/api/v1/get/downloadmedia/downloads")
     .then(res => {
-      if (!res.ok) throw new Error("Counter not initialized yet or failed");
+      if (res.status === 404) {
+        return fetch("https://countapi.mileshilliard.com/api/v1/hit/downloadmedia/downloads")
+          .then(r => r.ok ? r.json() : Promise.reject(new Error("Init failed")));
+      }
+      if (!res.ok) throw new Error("Counter fetch failed");
       return res.json();
     })
     .then(data => {
@@ -65,7 +79,7 @@ function setupDownloadsCounter() {
     })
     .catch(err => {
       counterEl.classList.remove('skeleton-text');
-      console.error("Failed to fetch download count from CountAPI:", err);
+      console.warn("Download counter unavailable:", err.message);
       animateCounter(counterEl, 0);
     });
 }
