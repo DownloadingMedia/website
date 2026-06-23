@@ -362,18 +362,11 @@ const CACHE_DURATION = 5 * 60 * 1000;
 
 async function fetchAllDriveDownloads() {
   try {
-    const navEntries = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation');
-    const isReload = navEntries && navEntries[0] && navEntries[0].type === 'reload';
-
-    if (!isReload) {
-      const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
-      const cachedData = localStorage.getItem(CACHE_KEY);
-      if (cachedTime && cachedData && (Date.now() - parseInt(cachedTime, 10) < CACHE_DURATION)) {
-        console.log("Loading downloads from local storage cache...");
-        return JSON.parse(cachedData);
-      }
-    } else {
-      console.log("Page reload detected. Bypassing downloads cache to fetch fresh data...");
+    const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+    const cachedData = localStorage.getItem(CACHE_KEY);
+    if (cachedTime && cachedData && (Date.now() - parseInt(cachedTime, 10) < CACHE_DURATION)) {
+      console.log("Loading downloads from local storage cache...");
+      return JSON.parse(cachedData);
     }
   } catch (e) {
     console.error("Error reading downloads cache:", e);
