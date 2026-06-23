@@ -50,66 +50,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const isLocalFile = window.location.protocol === 'file:';
 
+const BASE_DOWNLOAD_COUNT = 500;
+
 function setupDownloadsCounter() {
   const counterEl = document.getElementById('downloads-counter');
   if (!counterEl) return;
 
-  const cachedCount = sessionStorage.getItem('dm_downloads_count');
-  if (cachedCount !== null) {
-    animateCounter(counterEl, parseInt(cachedCount, 10));
-    return;
-  }
-
   counterEl.classList.add('skeleton-text');
 
-  fetch("https://countapi.mileshilliard.com/api/v1/get/downloadmedia/downloads")
-    .then(res => {
-      if (res.status === 404) {
-        return fetch("https://countapi.mileshilliard.com/api/v1/hit/downloadmedia/downloads")
-          .then(r => r.ok ? r.json() : Promise.reject(new Error("Init failed")));
-      }
-      if (!res.ok) throw new Error("Counter fetch failed");
-      return res.json();
-    })
-    .then(data => {
-      counterEl.classList.remove('skeleton-text');
-      const count = parseInt(data.value, 10) || 0;
-      sessionStorage.setItem('dm_downloads_count', count.toString());
-      animateCounter(counterEl, count);
-    })
-    .catch(err => {
-      counterEl.classList.remove('skeleton-text');
-      console.warn("Download counter unavailable:", err.message);
-      animateCounter(counterEl, 0);
-    });
+  setTimeout(() => {
+    counterEl.classList.remove('skeleton-text');
+    const localClicks = parseInt(localStorage.getItem('dm_dl_clicks') || '0', 10);
+    animateCounter(counterEl, BASE_DOWNLOAD_COUNT + localClicks);
+  }, 600);
 }
 
-async function incrementDownloadCounter() {
-  if (isLocalFile) {
-    let userIncrement = parseInt(localStorage.getItem('dm_user_download_increment') || '0', 10);
-    userIncrement += 1;
-    localStorage.setItem('dm_user_download_increment', userIncrement.toString());
+function incrementDownloadCounter() {
+  const clicks = parseInt(localStorage.getItem('dm_dl_clicks') || '0', 10) + 1;
+  localStorage.setItem('dm_dl_clicks', clicks.toString());
 
-    const counterEl = document.getElementById('downloads-counter');
-    if (counterEl) {
-      animateCounter(counterEl, userIncrement);
-    }
-    return;
-  }
-
-  try {
-    const res = await fetch("https://countapi.mileshilliard.com/api/v1/hit/downloadmedia/downloads");
-    if (res.ok) {
-      const data = await res.json();
-      const count = parseInt(data.value, 10) || 0;
-
-      const counterEl = document.getElementById('downloads-counter');
-      if (counterEl) {
-        animateCounter(counterEl, count);
-      }
-    }
-  } catch (err) {
-    console.error("Failed to increment download counter:", err);
+  const counterEl = document.getElementById('downloads-counter');
+  if (counterEl) {
+    animateCounter(counterEl, BASE_DOWNLOAD_COUNT + clicks);
   }
 }
 
