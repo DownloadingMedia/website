@@ -355,7 +355,7 @@ function setupAccordions() {
 }
 
 async function fetchDriveChildren(parentId) {
-  const url = `https://www.googleapis.com/drive/v3/files?q=('${parentId}' in parents) and trashed=false&fields=files(id,name,mimeType,size,parents)&key=${GOOGLE_DRIVE_API_KEY}&pageSize=1000&t=${Date.now()}`;
+  const url = `https://www.googleapis.com/drive/v3/files?q=('${parentId}' in parents) and trashed=false&fields=files(id,name,mimeType,size,parents,createdTime)&key=${GOOGLE_DRIVE_API_KEY}&pageSize=1000&t=${Date.now()}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) return [];
   const data = await res.json();
@@ -442,6 +442,7 @@ async function fetchAllDriveDownloads() {
           file: file.name,
           format: format,
           size: sizeStr,
+          createdTime: file.createdTime,
           link: `https://drive.google.com/uc?export=download&id=${file.id}`
         });
       }
@@ -479,10 +480,20 @@ async function syncReleasesFromChangelogs() {
       const winFiles = allDriveFiles.windows.filter(f => f.version === version);
       const macFiles = allDriveFiles.macos.filter(f => f.version === version);
       const linFiles = allDriveFiles.linux.filter(f => f.version === version);
+      
+      const allFiles = [...winFiles, ...macFiles, ...linFiles];
+      let dateStr = "Recent";
+      if (allFiles.length > 0 && allFiles[0].createdTime) {
+        const createdDate = new Date(allFiles[0].createdTime);
+        const diffMs = new Date() - createdDate;
+        if (diffMs > 24 * 60 * 60 * 1000) {
+          dateStr = createdDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+      }
 
       dynamicReleases.push({
         version: version,
-        date: "Recent",
+        date: dateStr,
         status: "production",
         changelog: "Loading...",
         downloads: {
