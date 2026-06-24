@@ -48,9 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-const isLocalFile = window.location.protocol === 'file:';
-
-const BASE_DOWNLOAD_COUNT = 500;
+const COUNTER_API_URL = 'https://downloadmedia-counter.onrender.com';
 
 function setupDownloadsCounter() {
   const counterEl = document.getElementById('downloads-counter');
@@ -58,21 +56,35 @@ function setupDownloadsCounter() {
 
   counterEl.classList.add('skeleton-text');
 
-  setTimeout(() => {
-    counterEl.classList.remove('skeleton-text');
-    const localClicks = parseInt(localStorage.getItem('dm_dl_clicks') || '0', 10);
-    animateCounter(counterEl, BASE_DOWNLOAD_COUNT + localClicks);
-  }, 600);
+  fetch(`${COUNTER_API_URL}/api/downloads`)
+    .then(res => {
+      if (!res.ok) throw new Error('API error');
+      return res.json();
+    })
+    .then(data => {
+      counterEl.classList.remove('skeleton-text');
+      animateCounter(counterEl, data.count || 0);
+    })
+    .catch(() => {
+      counterEl.classList.remove('skeleton-text');
+      animateCounter(counterEl, 0);
+    });
 }
 
-function incrementDownloadCounter() {
-  const clicks = parseInt(localStorage.getItem('dm_dl_clicks') || '0', 10) + 1;
-  localStorage.setItem('dm_dl_clicks', clicks.toString());
+const COUNTER_API_KEY = 'dm-counter-secret';
 
+function incrementDownloadCounter() {
   const counterEl = document.getElementById('downloads-counter');
-  if (counterEl) {
-    animateCounter(counterEl, BASE_DOWNLOAD_COUNT + clicks);
-  }
+
+  fetch(`${COUNTER_API_URL}/api/downloads/hit`, {
+    method: 'POST',
+    headers: { 'x-api-key': COUNTER_API_KEY }
+  })
+    .then(res => res.ok ? res.json() : null)
+    .then(data => {
+      if (data && counterEl) animateCounter(counterEl, data.count);
+    })
+    .catch(() => {});
 }
 
 function animateCounter(counterEl, target) {
