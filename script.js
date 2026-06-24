@@ -71,15 +71,10 @@ function setupDownloadsCounter() {
     });
 }
 
-const COUNTER_API_KEY = 'dda2b23662c0c72fab65b0fba4c027e4a5673fc7ecb322aa4c074397b8da3d74';
-
 function incrementDownloadCounter() {
   const counterEl = document.getElementById('downloads-counter');
 
-  fetch(`${COUNTER_API_URL}/api/downloads/hit`, {
-    method: 'POST',
-    headers: { 'x-api-key': COUNTER_API_KEY }
-  })
+  fetch(`${COUNTER_API_URL}/api/downloads/hit`, { method: 'POST' })
     .then(res => res.ok ? res.json() : null)
     .then(data => {
       if (data && counterEl) animateCounter(counterEl, data.count);
