@@ -12,6 +12,26 @@ const SVGS = {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // Mobile Blocker
+  if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    const blocker = document.createElement('div');
+    blocker.className = 'mobile-blocker';
+    blocker.innerHTML = `
+      <i class="fi fi-br-laptop mobile-blocker-icon"></i>
+      <h2 class="mobile-blocker-title">Desktop App</h2>
+      <p class="mobile-blocker-desc">DownloadMedia is a desktop application. Please visit this website on your PC or Mac to download the app.</p>
+    `;
+    document.body.appendChild(blocker);
+    document.body.style.overflow = 'hidden';
+    
+    // Disable any download buttons behind the overlay
+    document.querySelectorAll('a[href$=".exe"], a[href$=".dmg"], a[href$=".AppImage"]').forEach(btn => {
+      btn.addEventListener('click', (e) => e.preventDefault());
+      btn.style.pointerEvents = 'none';
+    });
+    return; // Stop further execution since the page is blocked
+  }
+
   detectUserOS();
   setupAccordions();
   setupDownloadsCounter();
