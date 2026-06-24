@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     blocker.className = 'mobile-blocker';
     blocker.innerHTML = `
       <i class="fi fi-br-laptop mobile-blocker-icon"></i>
-      <h2 class="mobile-blocker-title">Desktop App</h2>
-      <p class="mobile-blocker-desc">DownloadMedia is a desktop application. Please visit this website on your PC or Mac to download the app.</p>
+      <h2 class="mobile-blocker-title accent-orange">Desktop App</h2>
+      <p class="mobile-blocker-desc">get to your pc to download this app</p>
     `;
     document.body.appendChild(blocker);
     document.body.style.overflow = 'hidden';
