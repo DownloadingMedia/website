@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-const COUNTER_API_URL = 'https://downloadmedia-counter.onrender.com';
+const COUNTER_API_URL = 'https://counter-p6lb.onrender.com';
 
 function setupDownloadsCounter() {
   const counterEl = document.getElementById('downloads-counter');
