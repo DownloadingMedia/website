@@ -31,6 +31,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://downloadmedia.me/pages/changelog.html</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://downloadmedia.me/pages/terms.html</loc>
     <lastmod>2026-06-23</lastmod>
     <changefreq>yearly</changefreq>
@@ -41,17 +47,6 @@
     <lastmod>2026-06-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-  <url>
-    <loc>https://downloadmedia.me/pages/changelog.html</loc>
-    <lastmod>2026-06-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://downloadmedia.me/pages/documentation.html</loc>
-    <lastmod>2026-06-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://downloadmedia.me/pages/cookie-policy.html</loc>
