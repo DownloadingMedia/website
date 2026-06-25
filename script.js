@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   detectUserOS();
   setupAccordions();
   setupDownloadsCounter();
+  fetchLatestHeroVersion();
 
   const releasesContainer = document.getElementById("releases-container");
   const changelogPageContainer = document.getElementById("changelog-page-container");
@@ -123,40 +124,10 @@ function animateCounter(counterEl, target) {
 }
 
 function detectUserOS() {
-  const userAgent = window.navigator.userAgent;
-  const platform = window.navigator.platform;
-  const osNameEl = document.getElementById("os-name");
-  const osIconEl = document.getElementById("os-icon");
   const downloadBtn = document.getElementById("hero-download-btn");
+  const downloadLink = "https://get.microsoft.com/installer/download/9mzgb01bpb1n?referrer=appbadge";
 
-  let detectedOS = "Windows";
-  let iconHtml = SVGS.windows;
-  let downloadLink = "https://apps.microsoft.com/detail/9MZGB01BPB1N";
-
-  if (userAgent.indexOf("Mac") !== -1 || platform.indexOf("Mac") !== -1) {
-    detectedOS = "macOS";
-    iconHtml = SVGS.macos;
-    downloadLink = "DownloadMedia-1.0.0-arm64.dmg";
-  } else if (userAgent.indexOf("Linux") !== -1 || platform.indexOf("Linux") !== -1) {
-    detectedOS = "Linux";
-    iconHtml = SVGS.linux;
-    downloadLink = "DownloadMedia-1.0.0.AppImage";
-  }
-
-  if (osNameEl && osIconEl && downloadBtn) {
-    if (detectedOS === "Windows") {
-      osNameEl.textContent = "Microsoft Store";
-      const btnTextEl = document.getElementById("btn-text-content");
-      if (btnTextEl) {
-        btnTextEl.innerHTML = 'Download from <span id="os-name">Microsoft Store</span>';
-      }
-    } else {
-      const btnTextEl = document.getElementById("btn-text-content");
-      if (btnTextEl) {
-        btnTextEl.innerHTML = 'Download for <span id="os-name">' + detectedOS + '</span>';
-      }
-    }
-    osIconEl.innerHTML = iconHtml;
+  if (downloadBtn) {
     downloadBtn.addEventListener("click", (e) => {
       e.preventDefault();
       incrementDownloadCounter();
@@ -528,3 +499,43 @@ document.addEventListener("click", (e) => {
     incrementDownloadCounter();
   }
 });
+
+async function fetchLatestHeroVersion() {
+  const versionTag = document.getElementById("hero-version-tag");
+  if (!versionTag) return;
+
+  try {
+    const cachedVersion = localStorage.getItem("dm_latest_version");
+    const cachedTime = localStorage.getItem("dm_latest_version_time");
+    const cacheDuration = 10 * 60 * 1000; // 10 minutes cache
+
+    if (cachedVersion && cachedTime && (Date.now() - parseInt(cachedTime, 10) < cacheDuration)) {
+      versionTag.innerHTML = `{ v${cachedVersion} &mdash; Now Available }`;
+      return;
+    }
+
+    const res = await fetch("https://api.github.com/repos/DownloadingMedia/Desktop-App/contents");
+    if (!res.ok) throw new Error("Failed to fetch repo contents");
+    const files = await res.json();
+    
+    let latestVersion = null;
+    for (const file of files) {
+      if (!file.name.endsWith(".txt")) continue;
+      const match = file.name.match(/changelog-v?([\d\.]+)\.txt/i);
+      if (!match) continue;
+      
+      const version = match[1];
+      if (!latestVersion || version.localeCompare(latestVersion, undefined, { numeric: true, sensitivity: 'base' }) > 0) {
+        latestVersion = version;
+      }
+    }
+
+    if (latestVersion) {
+      versionTag.innerHTML = `{ v${latestVersion} &mdash; Now Available }`;
+      localStorage.setItem("dm_latest_version", latestVersion);
+      localStorage.setItem("dm_latest_version_time", Date.now().toString());
+    }
+  } catch (err) {
+    console.error("Failed to fetch latest version:", err);
+  }
+}
