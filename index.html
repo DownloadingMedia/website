@@ -132,30 +132,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&display=swap"
     as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&display=swap"
       rel="stylesheet">
   </noscript>
-  <link rel="stylesheet" href="flaticon/bold/rounded.css" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="flaticon/brands/all.css" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="flaticon/bold/rounded.css">
-    <link rel="stylesheet" href="flaticon/brands/all.css">
-  </noscript>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-X51XQCK5H9';
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-X51XQCK5H9');
+      }, 1000);
+    });
+  </script>
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X51XQCK5H9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'G-X51XQCK5H9');
-  </script>
 </head>
 
 <body>
@@ -222,20 +224,20 @@
             class="bracket-tag accent-orange" style="width: 100%; text-align: center;">
             { Supported Platforms }</div>
           <div class="marquee-content">
-            <span class="marquee-item"><i class="fi fi-brands-youtube"></i> YouTube</span>
-            <span class="marquee-item"><i class="fi fi-brands-tik-tok"></i> TikTok</span>
-            <span class="marquee-item"><i class="fi fi-brands-instagram"></i> Instagram</span>
-            <span class="marquee-item"><i class="fi fi-brands-twitter"></i> Twitter / X</span>
-            <span class="marquee-item"><i class="fi fi-brands-twitch"></i> Twitch</span>
-            <span class="marquee-item"><i class="fi fi-brands-facebook"></i> Facebook</span>
-            <span class="marquee-item"><i class="fi fi-brands-soundcloud"></i> SoundCloud</span>
-            <span class="marquee-item"><i class="fi fi-brands-youtube"></i> YouTube</span>
-            <span class="marquee-item"><i class="fi fi-brands-tik-tok"></i> TikTok</span>
-            <span class="marquee-item"><i class="fi fi-brands-instagram"></i> Instagram</span>
-            <span class="marquee-item"><i class="fi fi-brands-twitter"></i> Twitter / X</span>
-            <span class="marquee-item"><i class="fi fi-brands-twitch"></i> Twitch</span>
-            <span class="marquee-item"><i class="fi fi-brands-facebook"></i> Facebook</span>
-            <span class="marquee-item"><i class="fi fi-brands-soundcloud"></i> SoundCloud</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.517 0-9.388.507a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.871.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> YouTube</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.52-4.06-1.39-.77-.57-1.39-1.35-1.77-2.24-.04 1.94-.02 3.87-.03 5.8-.07 2.04-.6 4.14-1.88 5.75-1.31 1.71-3.4 2.8-5.58 2.99-2.49.25-5.1-.55-6.86-2.35C.54 16.7-0.29 13.9.06 11.23c.31-2.33 1.73-4.5 3.88-5.46 1.45-.66 3.09-.84 4.67-.54v4.1c-.88-.27-1.87-.27-2.71.2-.95.53-1.63 1.47-1.81 2.54-.33 1.64.44 3.43 1.9 4.22 1.25.7 2.87.67 4.07-.13.88-.58 1.41-1.57 1.48-2.61.02-3.15.01-6.3.01-9.45-.01-.02-.01-.04-.01-.07z"/></svg> TikTok</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg> Instagram</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Twitter / X</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg> Twitch</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg> Facebook</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1.2 11.4c0-.33.27-.6.6-.6s.6.27.6.6v2.4c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-1.8c0-.33.27-.6.6-.6s.6.27.6.6v4.8c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-1.2c0-.33.27-.6.6-.6s.6.27.6.6v6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v7.2c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v7.8c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v7.8c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8 1.2c0-.33.27-.6.6-.6s.6.27.6.6v6.6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-2.4c0-.33.27-.6.6-.6s.6.27.6.6v9c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8.6c0-.33.27-.6.6-.6s.6.27.6.6v8.4c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8.6c0-.33.27-.6.6-.6s.6.27.6.6v7.8c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8 1.2c0-.33.27-.6.6-.6s.6.27.6.6v6.6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8.6c0-.33.27-.6.6-.6s.6.27.6.6v6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v6.6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8.6c0-.33.27-.6.6-.6s.6.27.6.6v6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v6.6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm2.4-5.4c-.66 0-1.2.54-1.2 1.2v10.8c0 .66.54 1.2 1.2 1.2h7.2c2.65 0 4.8-2.15 4.8-4.8 0-1.86-1.07-3.48-2.63-4.27-.13-2.02-1.81-3.61-3.85-3.59-1.24.01-2.39.63-3.08 1.66z"/></svg> SoundCloud</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.517 0-9.388.507a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.871.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> YouTube</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.52-4.06-1.39-.77-.57-1.39-1.35-1.77-2.24-.04 1.94-.02 3.87-.03 5.8-.07 2.04-.6 4.14-1.88 5.75-1.31 1.71-3.4 2.8-5.58 2.99-2.49.25-5.1-.55-6.86-2.35C.54 16.7-0.29 13.9.06 11.23c.31-2.33 1.73-4.5 3.88-5.46 1.45-.66 3.09-.84 4.67-.54v4.1c-.88-.27-1.87-.27-2.71.2-.95.53-1.63 1.47-1.81 2.54-.33 1.64.44 3.43 1.9 4.22 1.25.7 2.87.67 4.07-.13.88-.58 1.41-1.57 1.48-2.61.02-3.15.01-6.3.01-9.45-.01-.02-.01-.04-.01-.07z"/></svg> TikTok</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg> Instagram</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Twitter / X</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg> Twitch</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg> Facebook</span>
+            <span class="marquee-item"><svg class="marquee-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1.2 11.4c0-.33.27-.6.6-.6s.6.27.6.6v2.4c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-1.8c0-.33.27-.6.6-.6s.6.27.6.6v4.8c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-1.2c0-.33.27-.6.6-.6s.6.27.6.6v6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v7.2c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v7.8c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v7.8c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8 1.2c0-.33.27-.6.6-.6s.6.27.6.6v6.6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-2.4c0-.33.27-.6.6-.6s.6.27.6.6v9c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8.6c0-.33.27-.6.6-.6s.6.27.6.6v8.4c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8.6c0-.33.27-.6.6-.6s.6.27.6.6v7.8c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8 1.2c0-.33.27-.6.6-.6s.6.27.6.6v6.6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8.6c0-.33.27-.6.6-.6s.6.27.6.6v6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v6.6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8.6c0-.33.27-.6.6-.6s.6.27.6.6v6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm1.8-.6c0-.33.27-.6.6-.6s.6.27.6.6v6.6c0 .33-.27.6-.6.6s-.6-.27-.6-.6zm2.4-5.4c-.66 0-1.2.54-1.2 1.2v10.8c0 .66.54 1.2 1.2 1.2h7.2c2.65 0 4.8-2.15 4.8-4.8 0-1.86-1.07-3.48-2.63-4.27-.13-2.02-1.81-3.61-3.85-3.59-1.24.01-2.39.63-3.08 1.66z"/></svg> SoundCloud</span>
           </div>
         </div>
         <div class="hairline-divider" style="margin-top: 80px;"></div>
@@ -251,7 +253,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">What formats and codecs are supported?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -271,7 +273,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">Are there any speed limits on downloads?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -289,7 +291,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">Does it bypass DRM?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -305,7 +307,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">Is DownloadMedia really free?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -319,7 +321,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">Can I download an entire playlist or channel?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -337,7 +339,7 @@
                   <h3 class="feature-card-title" style="margin: 0;">Why should I use this instead of a website
                     downloader?
                   </h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -356,7 +358,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">How does the proxy feature work?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -373,7 +375,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">What's the best format for video editing?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -389,7 +391,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">Is DownloadMedia a desktop application?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -402,7 +404,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">Can I download videos for free?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">
@@ -415,7 +417,7 @@
               <div class="faq-card">
                 <div class="accordion-toggle">
                   <h3 class="feature-card-title" style="margin: 0;">Does it work on mobile?</h3>
-                  <i class="fi fi-br-angle-down accordion-icon"></i>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="accordion-icon" style="width: 1em; height: 1em; stroke: currentColor;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
                 <div class="accordion-panel">
                   <div style="padding-top: 0.75rem;">

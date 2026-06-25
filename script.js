@@ -17,7 +17,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const blocker = document.createElement('div');
     blocker.className = 'mobile-blocker';
     blocker.innerHTML = `
-      <i class="fi fi-br-laptop mobile-blocker-icon"></i>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mobile-blocker-icon" style="width: 4rem; height: 4rem; margin-bottom: 1.5rem; color: var(--color-cream-glow);">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="2" y1="20" x2="22" y2="20"></line>
+        <line x1="12" y1="20" x2="12" y2="17"></line>
+      </svg>
       <h2 class="mobile-blocker-title accent-orange">Desktop App</h2>
       <p class="mobile-blocker-desc">get to your pc to download this app</p>
     `;
@@ -233,7 +237,7 @@ function renderReleases(filter) {
 
       <div class="changelog-collapse">
         <button class="changelog-toggle">
-          <i class="fi fi-br-angle-down"></i> Release Notes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 1em; height: 1em; stroke: currentColor; transition: transform 0.22s ease;"><polyline points="6 9 12 15 18 9"></polyline></svg> Release Notes
         </button>
         <div class="changelog-panel">
           <div class="changelog-panel-content" id="changelog-${release.version.replace(/\./g, '-')}">Loading changelog from GitHub...</div>

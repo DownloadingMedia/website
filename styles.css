@@ -1,6 +1,5 @@
 
 
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&display=swap');
 
 :root {
   /* Colors */
@@ -370,16 +369,19 @@ a {
   white-space: nowrap;
 }
 
-.marquee-item i {
-  font-size: 1.35rem;
+.marquee-svg {
+  width: 1.35rem;
+  height: 1.35rem;
   opacity: 0.7;
+  transition: opacity 0.3s;
+  flex-shrink: 0;
 }
 
 .marquee-item:hover {
   color: var(--text);
 }
 
-.marquee-item:hover i {
+.marquee-item:hover .marquee-svg {
   opacity: 1;
 }
 
@@ -608,11 +610,11 @@ a {
   color: var(--text);
 }
 
-.changelog-toggle i {
+.changelog-toggle svg {
   transition: transform 0.22s ease;
 }
 
-.changelog-toggle.active i {
+.changelog-toggle.active svg {
   transform: rotate(180deg);
 }
 
