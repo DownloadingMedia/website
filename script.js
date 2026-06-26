@@ -79,21 +79,40 @@ function setupDownloadsCounter() {
   const counterEl = document.getElementById('downloads-counter');
   if (!counterEl) return;
 
-  counterEl.classList.add('skeleton-text');
+  const CACHE_KEY = 'dm_download_count';
+  const CACHE_TS_KEY = 'dm_download_count_ts';
+  const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
-  fetch(`${COUNTER_API_URL}/api/downloads`)
-    .then(res => {
-      if (!res.ok) throw new Error('API error');
-      return res.json();
-    })
-    .then(data => {
-      counterEl.classList.remove('skeleton-text');
-      animateCounter(counterEl, data.count || 0);
-    })
-    .catch(() => {
-      counterEl.classList.remove('skeleton-text');
-      animateCounter(counterEl, 0);
-    });
+  // Show cached value instantly — no skeleton, no wait
+  const cached = localStorage.getItem(CACHE_KEY);
+  const cachedTs = parseInt(localStorage.getItem(CACHE_TS_KEY) || '0', 10);
+  const now = Date.now();
+
+  if (cached !== null) {
+    counterEl.innerText = parseInt(cached, 10).toLocaleString();
+  } else {
+    counterEl.classList.add('skeleton-text');
+  }
+
+  // Only hit API if cache is stale (older than 1 hour) or missing
+  if (cached === null || (now - cachedTs) > CACHE_TTL_MS) {
+    fetch(`${COUNTER_API_URL}/api/downloads`)
+      .then(res => {
+        if (!res.ok) throw new Error('API error');
+        return res.json();
+      })
+      .then(data => {
+        counterEl.classList.remove('skeleton-text');
+        const count = data.count || 0;
+        localStorage.setItem(CACHE_KEY, count);
+        localStorage.setItem(CACHE_TS_KEY, now.toString());
+        animateCounter(counterEl, count);
+      })
+      .catch(() => {
+        counterEl.classList.remove('skeleton-text');
+        if (cached === null) counterEl.innerText = '0';
+      });
+  }
 }
 
 function incrementDownloadCounter() {
@@ -102,7 +121,12 @@ function incrementDownloadCounter() {
   fetch(`${COUNTER_API_URL}/api/downloads/hit`, { method: 'POST' })
     .then(res => res.ok ? res.json() : null)
     .then(data => {
-      if (data && counterEl) animateCounter(counterEl, data.count);
+      if (data && counterEl) {
+        animateCounter(counterEl, data.count);
+        // Keep cache in sync with the fresh count
+        localStorage.setItem('dm_download_count', data.count);
+        localStorage.setItem('dm_download_count_ts', Date.now().toString());
+      }
     })
     .catch(() => {});
 }
