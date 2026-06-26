@@ -12,7 +12,6 @@ const SVGS = {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Mobile Blocker
   if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     const blocker = document.createElement('div');
     blocker.className = 'mobile-blocker';
@@ -27,13 +26,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
     document.body.appendChild(blocker);
     document.body.style.overflow = 'hidden';
-    
-    // Disable any download buttons behind the overlay
     document.querySelectorAll('a[href$=".exe"], a[href$=".dmg"], a[href$=".AppImage"]').forEach(btn => {
       btn.addEventListener('click', (e) => e.preventDefault());
       btn.style.pointerEvents = 'none';
     });
-    return; // Stop further execution since the page is blocked
+    return;
   }
 
   detectUserOS();
@@ -81,9 +78,7 @@ function setupDownloadsCounter() {
 
   const CACHE_KEY = 'dm_download_count';
   const CACHE_TS_KEY = 'dm_download_count_ts';
-  const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
-
-  // Show cached value instantly — no skeleton, no wait
+  const CACHE_TTL_MS = 60 * 60 * 1000;
   const cached = localStorage.getItem(CACHE_KEY);
   const cachedTs = parseInt(localStorage.getItem(CACHE_TS_KEY) || '0', 10);
   const now = Date.now();
@@ -94,7 +89,6 @@ function setupDownloadsCounter() {
     counterEl.classList.add('skeleton-text');
   }
 
-  // Only hit API if cache is stale (older than 1 hour) or missing
   if (cached === null || (now - cachedTs) > CACHE_TTL_MS) {
     fetch(`${COUNTER_API_URL}/api/downloads`)
       .then(res => {
@@ -123,12 +117,11 @@ function incrementDownloadCounter() {
     .then(data => {
       if (data && counterEl) {
         animateCounter(counterEl, data.count);
-        // Keep cache in sync with the fresh count
         localStorage.setItem('dm_download_count', data.count);
         localStorage.setItem('dm_download_count_ts', Date.now().toString());
       }
     })
-    .catch(() => {});
+    .catch(() => { });
 }
 
 function animateCounter(counterEl, target) {
@@ -479,7 +472,7 @@ async function syncReleasesFromChangelogs() {
       const winFiles = allDriveFiles.windows.filter(f => f.version === version);
       const macFiles = allDriveFiles.macos.filter(f => f.version === version);
       const linFiles = allDriveFiles.linux.filter(f => f.version === version);
-      
+
       const allFiles = [...winFiles, ...macFiles, ...linFiles];
       let dateStr = "Recent";
       if (allFiles.length > 0 && allFiles[0].createdTime) {
@@ -535,7 +528,7 @@ async function fetchLatestHeroVersion() {
   try {
     const cachedVersion = localStorage.getItem("dm_latest_version");
     const cachedTime = localStorage.getItem("dm_latest_version_time");
-    const cacheDuration = 10 * 60 * 1000; // 10 minutes cache
+    const cacheDuration = 10 * 60 * 1000;
 
     if (cachedVersion && cachedTime && (Date.now() - parseInt(cachedTime, 10) < cacheDuration)) {
       versionTag.innerHTML = `{ v${cachedVersion} &mdash; Now Available }`;
@@ -545,13 +538,13 @@ async function fetchLatestHeroVersion() {
     const res = await fetch("https://api.github.com/repos/DownloadingMedia/Desktop-App/contents");
     if (!res.ok) throw new Error("Failed to fetch repo contents");
     const files = await res.json();
-    
+
     let latestVersion = null;
     for (const file of files) {
       if (!file.name.endsWith(".txt")) continue;
       const match = file.name.match(/changelog-v?([\d\.]+)\.txt/i);
       if (!match) continue;
-      
+
       const version = match[1];
       if (!latestVersion || version.localeCompare(latestVersion, undefined, { numeric: true, sensitivity: 'base' }) > 0) {
         latestVersion = version;
