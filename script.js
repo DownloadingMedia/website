@@ -531,7 +531,7 @@ async function fetchLatestHeroVersion() {
     const cacheDuration = 10 * 60 * 1000;
 
     if (cachedVersion && cachedTime && (Date.now() - parseInt(cachedTime, 10) < cacheDuration)) {
-      versionTag.innerHTML = `{ v${cachedVersion} &mdash; Now Available }`;
+      versionTag.innerHTML = `{ v${cachedVersion} | Now Available }`;
       return;
     }
 
@@ -552,7 +552,7 @@ async function fetchLatestHeroVersion() {
     }
 
     if (latestVersion) {
-      versionTag.innerHTML = `{ v${latestVersion} &mdash; Now Available }`;
+      versionTag.innerHTML = `{ v${latestVersion} | Now Available }`;
       localStorage.setItem("dm_latest_version", latestVersion);
       localStorage.setItem("dm_latest_version_time", Date.now().toString());
     }
